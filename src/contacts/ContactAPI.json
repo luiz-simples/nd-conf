@@ -1,0 +1,25 @@
+[
+  {
+    "verb": "get",
+    "path": "/contacts",
+    "action": "ContactFindAction"
+  },
+
+  {
+    "verb": "post",
+    "path": "/contacts",
+    "action": "ContactCreateAction"
+  },
+
+  {
+    "verb": "delete",
+    "path": "/contacts/:id",
+    "action": "ContactDeleteAction"
+  },
+
+  {
+    "verb": "put",
+    "path": "/contacts/:id",
+    "action": "ContactUpdateAction"
+  }
+]

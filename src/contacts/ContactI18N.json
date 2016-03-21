@@ -1,0 +1,13 @@
+{
+  "br": {
+    "contacts.name":  "Nome",
+    "contacts.email": "Email",
+    "contacts.phone": "Telefone"
+  },
+
+  "en": {
+    "contacts.name":  "Name",
+    "contacts.email": "Email",
+    "contacts.phone": "Phone"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "nd-conf",
+  "version": "1.0.0",
+  "description": "Node API configuration via JSON",
+  "main": "server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/luiz-simples/nd-conf.git"
+  },
+  "keywords": [
+    "Node",
+    "API",
+    "JSON"
+  ],
+  "author": "Luiz Amorim <luiz.simples@gmail.com> (http://nurimba.com.br)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/luiz-simples/nd-conf/issues"
+  },
+  "homepage": "https://github.com/luiz-simples/nd-conf#readme"
+}
