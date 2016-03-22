@@ -1,0 +1,13 @@
+dev:
+  image: malera/nd-conf
+  volumes:
+    - $HOME/.gitconfig:/nd/.gitconfig
+    - $HOME/.ssh:/nd/.ssh
+    - ./:/nd/src:rw
+  working_dir: /nd/src
+  environment:
+    - NODE_ENV=development
+  hostname: "dev"
+  dns:
+    - 8.8.8.8
+    - 8.8.4.4
