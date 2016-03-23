@@ -24,4 +24,15 @@ describe('LoadAPI', () => {
         },
       ]))
   });
+
+  pit('verify duplicity of routes', () => {
+    let loadAPI = new LoadAPI(`${fixtures}/duplicity`);
+    let expectMessage = 'Duplicity of route: "get" on "/end"';
+    let shouldReject = () => { throw new Error('should be rejected when duplicity of routes')};
+
+    return loadAPI
+      .readConfigs()
+      .then(shouldReject)
+      .catch(err => expect(err.message).toEqual(expectMessage))
+  });
 });
