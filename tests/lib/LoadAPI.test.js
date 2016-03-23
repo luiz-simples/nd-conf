@@ -5,7 +5,7 @@ jest.unmock('../../lib/LoadAPI');
 import path from 'path';
 import LoadAPI from '../../lib/LoadAPI';
 
-const fixtures = path.resolve(__dirname.concat('/../support/fixtures/api'));
+const fixtures = path.resolve(__dirname.concat('/../support/fixtures/LoadAPI'));
 
 describe('LoadAPI', () => {
   pit('load JSON configs', () => {
