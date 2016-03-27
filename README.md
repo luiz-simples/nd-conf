@@ -26,3 +26,10 @@ $ curl -sSL https://get.docker.com/ | sh
 ```sh
 nd@dev$ npm install
 ```
+
+
+###RUN TESTS
+
+```sh
+nd@dev$ npm test
+```
