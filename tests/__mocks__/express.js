@@ -1,5 +1,3 @@
-'use strict';
-
 const app = {
   get: jest.genMockFunction(),
   put: jest.genMockFunction(),
@@ -7,6 +5,4 @@ const app = {
   delete: jest.genMockFunction()
 }
 
-export default () => {
-  return app
-}
+export default jest.genMockFunction().mockImplementation(() => app)

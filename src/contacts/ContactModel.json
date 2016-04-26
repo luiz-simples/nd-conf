@@ -1,8 +1,0 @@
-{
-  "tableName": "contacts",
-  "fields": [
-    { "attr": "name",  "type": "string:80", "checks": ["required"] },
-    { "attr": "email", "type": "string:80", "checks": ["required", "email", "unique"] },
-    { "attr": "phone", "type": "string:25" }
-  ]
-}

@@ -6,9 +6,10 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "America/Sao_Paulo" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
-RUN apt-get update && apt-get upgrade -qqy --force-yes && apt-get dist-upgrade -qqy --force-yes
-RUN apt-get install -qqy --force-yes htop sudo libfontconfig1 bzip2 tar build-essential python-software-properties vim git curl locales
-RUN apt-get autoremove -qqy --force-yes && apt-get autoclean -qqy --force-yes && apt-get clean && apt-get update
+
+RUN apt-get update && apt-get upgrade -qqy --force-yes && apt-get dist-upgrade -qqy --force-yes && apt-get autoremove -qqy --force-yes
+RUN apt-get install -qqy --force-yes bash-completion libfontconfig1 bzip2 build-essential python-software-properties
+RUN apt-get install -qqy --force-yes htop sudo vim git curl locales
 
 RUN echo "LANGUAGE=pt_BR.UTF-8" >> /etc/environment
 RUN echo "LANG=pt_BR.UTF-8"     >> /etc/environment
@@ -32,7 +33,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 4.4.0
+ENV NODE_VERSION 4.4.3
 
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
@@ -41,17 +42,20 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
 
-RUN npm update -g npm
-RUN npm install -g gulp bower
+RUN npm update npm -g
+RUN npm install gulp bower -g
+
+### APPLY ENTRYPOINT
+COPY ./bash.bashrc /etc/bash.bashrc
+COPY ./docker-entrypoint.sh /var/lib/docker/docker-entrypoint.sh
+RUN chmod +x /var/lib/docker/docker-entrypoint.sh
 
 RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    useradd -u 5001 -G users,sudo -d /nd --shell /bin/bash -m nd && \
-    echo "secret\nsecret" | passwd nd
+    useradd -u 1000 -G users,sudo -d /conf --shell /bin/bash -m conf && \
+    echo "secret\nsecret" | passwd conf
 
-RUN usermod -u 1000 nd
-
-USER nd
-
-WORKDIR /nd
+USER conf
+WORKDIR /conf
 
 CMD [ "bash" ]
+ENTRYPOINT [ "/var/lib/docker/docker-entrypoint.sh" ]
