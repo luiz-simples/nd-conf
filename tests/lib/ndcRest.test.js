@@ -19,15 +19,15 @@ describe('ndcRest', () => {
   })
 
   pit('load Rest Application', () => {
-    const pathConfigs = '/happy'
+    const path = '/happy'
+    const app  = express()
 
-    return ndcRest(pathConfigs).then((app) => {
+    return ndcRest({ path, app }).then((ndcApp) => {
       const first  = 0
       const second = 1
 
-      expect(express).toBeCalled()
-      expect(app.get.mock.calls[first]).toEqual(['/end', jasmine.any(Function)])
-      expect(app.get.mock.calls[second]).toEqual(['/start', jasmine.any(Function)])
+      expect(ndcApp.get.mock.calls[first]).toEqual(['/end', jasmine.any(Function)])
+      expect(ndcApp.get.mock.calls[second]).toEqual(['/start', jasmine.any(Function)])
     })
   })
 })

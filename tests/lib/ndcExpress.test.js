@@ -41,10 +41,11 @@ describe('ndcExpress', () => {
   })
 
   it('call actions route', (done) => {
-    const pathConfigs = '/happy'
+    const path = '/happy'
+    const app = express()
 
-    ndcRest(pathConfigs).then((app) => {
-      request(app)
+    ndcRest({ path, app }).then((ndcApp) => {
+      request(ndcApp)
         .get('/end')
         .end((err, res) => {
           const firstArg  = 0
