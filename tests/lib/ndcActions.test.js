@@ -9,10 +9,11 @@ describe('ndcActions', () => {
   pit('load JSON configs', () => {
     const pathActions = `${fixtures}/happy`
 
-    return ndcActions(pathActions).then(actions => expect(Object.keys(actions)).toEqual([
-      'GetContacts',
-      'GetUsers'
-    ]))
+    return ndcActions(pathActions).then(actions => {
+      const actionsList = Object.keys(actions)
+      expect(actionsList).toContain('GetUsers')
+      expect(actionsList).toContain('GetContacts')
+    })
   })
 
   pit('verify duplicity of actions', () => {
