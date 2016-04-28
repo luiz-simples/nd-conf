@@ -2,7 +2,7 @@
   "name": "nd-conf",
   "version": "1.0.0",
   "description": "Node API configuration via JSON",
-  "main": "server.js",
+  "main": "./lib/ndcRest.js",
   "scripts": {
     "test": "jest"
   },
