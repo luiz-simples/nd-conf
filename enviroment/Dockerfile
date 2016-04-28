@@ -44,6 +44,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 RUN npm update npm -g
 RUN npm install gulp bower -g
+RUN npm install jest-cli -g
 
 ### APPLY ENTRYPOINT
 COPY ./bash.bashrc /etc/bash.bashrc
