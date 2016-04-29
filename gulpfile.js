@@ -4,11 +4,10 @@ var concat = require("gulp-concat");
 var uglify = require('gulp-uglify');
 //var sourcemaps = require("gulp-sourcemaps");
 
-gulp.task("default", function () {
+gulp.task("build-dist", function () {
   return gulp.src("lib/**/*.js")
     //.pipe(sourcemaps.init())
     .pipe(babel())
-    .pipe(concat("nd-conf.js"))
     .pipe(uglify())
     //.pipe(sourcemaps.write("."))
     .pipe(gulp.dest("dist"));

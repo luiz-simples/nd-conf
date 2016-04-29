@@ -1,8 +1,8 @@
 {
   "name": "nd-conf",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Node API configuration via JSON",
-  "main": "./dist/nd-conf.js",
+  "main": "./dist/ndcRest.js",
   "scripts": {
     "test": "jest --coverage"
   },
