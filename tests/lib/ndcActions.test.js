@@ -1,3 +1,4 @@
+jest.dontMock('path')
 jest.unmock('../../lib/ndcActions')
 
 import path from 'path'
@@ -19,7 +20,7 @@ describe('ndcActions', () => {
   pit('verify duplicity of actions', () => {
     const pathActions = `${fixtures}/duplicity`
 
-    let expectMessage = `Duplicity of action: "GetContacts" on files: "${fixtures}/duplicity/actions/GetContactsDuplicity.js" and "${fixtures}/duplicity/actions/GetContacts.js"`
+    let expectMessage = `Duplicity of action: "GetContacts" on files: "${fixtures}/duplicity/sub/GetContactsAction.js" and "${fixtures}/duplicity/GetContactsAction.js"`
     let shouldReject = () => { throw new Error('should be rejected when duplicity of actions')}
 
     return ndcActions(pathActions)

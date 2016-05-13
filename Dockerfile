@@ -1,15 +1,14 @@
 FROM debian:jessie
 
-MAINTAINER Luiz Amorim <luiz.simples@gmail.com> (http://nurimba.com.br)
+MAINTAINER Luiz Amorim <luiz.simples@gmail.com> (https://nurimba.com.br)
 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "America/Sao_Paulo" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
-RUN apt-get update && apt-get upgrade -qqy --force-yes && apt-get dist-upgrade -qqy --force-yes && apt-get autoremove -qqy --force-yes
-RUN apt-get install -qqy --force-yes bash-completion libfontconfig1 bzip2 build-essential python-software-properties
-RUN apt-get install -qqy --force-yes htop sudo vim git curl locales
+RUN apt-get update && apt-get upgrade --yes && apt-get dist-upgrade --yes && apt-get autoremove --yes
+RUN apt-get update && apt-get install --yes bash-completion libfontconfig1 bzip2 build-essential python-software-properties htop sudo vim git curl locales
 
 RUN echo "LANGUAGE=pt_BR.UTF-8" >> /etc/environment
 RUN echo "LANG=pt_BR.UTF-8"     >> /etc/environment
@@ -33,7 +32,7 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 4.4.3
+ENV NODE_VERSION 4.4.4
 
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
@@ -43,13 +42,11 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
 
 RUN npm update npm -g
-RUN npm install gulp bower -g
-RUN npm install jest-cli -g
 
 ### APPLY ENTRYPOINT
-COPY ./bash.bashrc /etc/bash.bashrc
-COPY ./docker-entrypoint.sh /var/lib/docker/docker-entrypoint.sh
-RUN chmod +x /var/lib/docker/docker-entrypoint.sh
+COPY ./docker/bash.bashrc /etc/bash.bashrc
+COPY ./docker/docker-entrypoint.sh /var/lib/docker-entrypoint.sh
+RUN chmod +x /var/lib/docker-entrypoint.sh
 
 RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     useradd -u 1000 -G users,sudo -d /conf --shell /bin/bash -m conf && \
@@ -59,4 +56,4 @@ USER conf
 WORKDIR /conf
 
 CMD [ "bash" ]
-ENTRYPOINT [ "/var/lib/docker/docker-entrypoint.sh" ]
+ENTRYPOINT [ "/var/lib/docker-entrypoint.sh" ]

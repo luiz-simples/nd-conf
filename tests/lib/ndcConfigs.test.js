@@ -1,3 +1,4 @@
+jest.dontMock('path')
 jest.unmock('../../lib/ndcConfigs')
 
 import path       from 'path'

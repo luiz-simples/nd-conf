@@ -1,35 +1,31 @@
 # nd-conf
-Node API configuration via JSON
+===============================
 
-##Environment with:
+Node API: Actions via JSON
 
-* [Docker](https://docs.docker.com/)
-* [Debian](https://www.debian.org/releases/stable/)
-* [Make](http://www.gnu.org/software/make/manual/make.html#Running)
-* [NodeJS](https://nodejs.org/dist/latest-v4.x/docs/api/)
+---------------------------------------------
 
+## Dependencies for development
+  * [GIT](https://git-scm.com/)
+  * [Docker Compose](https://docs.docker.com/compose/)
 
-##Docker install the linux environment:
+---------------------------------------------
 
+## First steps for development
+
+### clone project
 ```sh
-$ curl -sSL https://get.docker.com/ | sh
+$ git clone git@github.com:luiz-simples/nd-conf.git
+$ cd nd-conf/
 ```
 
-
-##Make tasks of environment
-
-* Enter enviroment shell - ```$ make run-development```
-
-
-###First steps after environment builded (inside the container)
-
+### you have docker-compose?
 ```sh
-nd@dev$ npm install
+$ docker-compose run --rm development
 ```
 
-
-###RUN TESTS
-
+### install and run tests
 ```sh
-nd@dev$ npm test
+$ npm install
+$ npm test
 ```

@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var ndcExecute=function(e){var t=this,n=e.exec.map(function(e){return t[e]}),r=Promise.resolve();return n.forEach(function(t){r=r.then(function(n){return t(n||{},e)})}),r.then(function(e){return e||{}})};exports["default"]=ndcExecute;

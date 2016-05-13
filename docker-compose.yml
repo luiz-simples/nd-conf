@@ -2,43 +2,12 @@ version: '2'
 
 services:
   development:
-    build: ./
+    image: malera/ndconf
     hostname: "dev"
     working_dir: /conf/src
     volumes:
+      - $HOME/.ssh:/conf/.ssh:ro
       - $HOME/.gitconfig:/conf/.gitconfig
-      - $HOME/.ssh:/conf/.ssh
       - ./:/conf/src:rw
     environment:
       - NODE_ENV=development
-    depends_on:
-      - postgres
-    networks:
-      my_custom_network:
-        ipv4_address: 196.40.111.30
-        ipv6_address: 2001:3984:3989::30
-
-  postgres:
-    image: postgres:9.4
-    hostname: "database"
-    environment:
-      - POSTGRES_DB-conf-db
-      - POSTGRES_USER=conf-user
-      - POSTGRES_PASSWORD=conf-password
-    networks:
-      my_custom_network:
-        ipv4_address: 196.40.111.20
-        ipv6_address: 2001:3984:3989::20
-
-networks:
-  my_custom_network:
-    driver: bridge
-    driver_opts:
-      com.docker.network.enable_ipv6: "true"
-    ipam:
-      driver: default
-      config:
-      - subnet: 196.40.111.0/24
-        gateway: 196.40.111.1
-      - subnet: 2001:3984:3989::/64
-        gateway: 2001:3984:3989::1
