@@ -1,12 +1,12 @@
 jest.dontMock('path')
-jest.unmock('../../lib/ndcConfigs')
+jest.unmock('../../lib/ndcLoad')
 
 import path       from 'path'
 import ndcRoutes  from '../../lib/ndcRoutes'
 import ndcActions from '../../lib/ndcActions'
-import ndcConfigs from '../../lib/ndcConfigs'
+import ndcLoad from '../../lib/ndcLoad'
 
-describe('ndcConfigs', () => {
+describe('ndcLoad', () => {
   let mockRoutes
   let mockActions
 
@@ -23,14 +23,14 @@ describe('ndcConfigs', () => {
   })
 
   pit('load actions and routes', () => {
-    const pathConfigs = '/happy'
+    const pathLoad = '/happy'
 
     ndcRoutes.mockImplementation(()  => new Promise(resolve => resolve(mockRoutes)))
     ndcActions.mockImplementation(() => new Promise(resolve => resolve(mockActions)))
 
-    return ndcConfigs(pathConfigs).then(({routes, actions}) => {
-      expect(ndcRoutes).toBeCalledWith(pathConfigs)
-      expect(ndcActions).toBeCalledWith(pathConfigs)
+    return ndcLoad(pathLoad).then(({routes, actions}) => {
+      expect(ndcRoutes).toBeCalledWith(pathLoad)
+      expect(ndcActions).toBeCalledWith(pathLoad)
       expect(routes).toEqual(mockRoutes)
       expect(Object.keys(actions)).toEqual([
         'GetContacts',
@@ -40,27 +40,27 @@ describe('ndcConfigs', () => {
   })
 
   pit('catch route duplicity', () => {
-    const pathConfigs   = '/happy'
+    const pathLoad   = '/happy'
     const expectMessage = 'Duplicity of route: "GET: /end" on files: "/duplicity/StartRest.json" and "/duplicity/EndRest.json"'
     const shouldReject = () => { throw new Error('should be rejected when duplicity of routes')}
 
     ndcRoutes.mockImplementation(()  => new Promise((resolve, reject) => reject(new Error(expectMessage))))
     ndcActions.mockImplementation(() => new Promise(resolve => resolve(mockActions)))
 
-    return ndcConfigs(pathConfigs)
+    return ndcLoad(pathLoad)
       .then(shouldReject)
       .catch(err => expect(err.message).toEqual(expectMessage))
   })
 
   pit('catch action duplicity', () => {
-    const pathConfigs   = '/happy'
+    const pathLoad   = '/happy'
     const expectMessage = 'Duplicity of action: "GetContacts" on files: "${fixtures}/duplicity/actions/GetContactsDuplicity.js" and "${fixtures}/duplicity/actions/GetContacts.js"'
     const shouldReject = () => { throw new Error('should be rejected when duplicity of actions')}
 
     ndcRoutes.mockImplementation(()  => new Promise(resolve => resolve(mockRoutes)))
     ndcActions.mockImplementation(() => new Promise((resolve, reject) => reject(new Error(expectMessage))))
 
-    return ndcConfigs(pathConfigs)
+    return ndcLoad(pathLoad)
       .then(shouldReject)
       .catch(err => expect(err.message).toEqual(expectMessage))
   })

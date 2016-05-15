@@ -1,16 +1,17 @@
-jest.unmock('../../lib/ndcRest')
+jest.unmock('../../lib/ndcApp')
 
-import path       from 'path'
-import express    from 'express'
-import ndcRest    from '../../lib/ndcRest'
-import ndcConfigs from '../../lib/ndcConfigs'
+import path    from 'path'
+import express from 'express'
 
-describe('ndcRest', () => {
+import ndcApp  from '../../lib/ndcApp'
+import ndcLoad from '../../lib/ndcLoad'
+
+describe('ndcApp', () => {
   let mockRoutes
   let mockActions
 
   beforeEach(() => {
-    ndcConfigs.mockImplementation(() => new Promise(resolve => resolve({
+    ndcLoad.mockImplementation(() => new Promise(resolve => resolve({
       routes: {
         'GET: /end':   { verb: 'get', path: '/end',   file: '/happy/EndRest.json' },
         'GET: /start': { verb: 'get', path: '/start', file: '/happy/EndRest.json' }
@@ -22,7 +23,7 @@ describe('ndcRest', () => {
     const path = '/happy'
     const app  = express()
 
-    return ndcRest({ path, app }).then((ndcApp) => {
+    return ndcApp({ path, app }).then((ndcApp) => {
       const first  = 0
       const second = 1
 

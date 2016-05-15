@@ -1,11 +1,12 @@
 jest.unmock('express')
-jest.unmock('../../lib/ndcRest')
+jest.unmock('../../lib/ndcApp')
 
-import path       from 'path'
-import express    from 'express'
-import request    from 'supertest'
-import ndcRest    from '../../lib/ndcRest'
-import ndcConfigs from '../../lib/ndcConfigs'
+import path    from 'path'
+import express from 'express'
+import request from 'supertest'
+
+import ndcApp  from '../../lib/ndcApp'
+import ndcLoad from '../../lib/ndcLoad'
 
 describe('ndcExpress', () => {
   let mockRoutes
@@ -32,7 +33,7 @@ describe('ndcExpress', () => {
     mockActions = { execute: jest.genMockFunction() }
     mockActions.execute.mockImplementation(() => new Promise(resolve => resolve()))
 
-    ndcConfigs.mockImplementation(() => new Promise(resolve => {
+    ndcLoad.mockImplementation(() => new Promise(resolve => {
       resolve({
         routes: mockRoutes,
         actions: mockActions
@@ -44,7 +45,7 @@ describe('ndcExpress', () => {
     const path = '/happy'
     const app = express()
 
-    ndcRest({ path, app }).then((ndcApp) => {
+    ndcApp({ path, app }).then((ndcApp) => {
       request(ndcApp)
         .get('/end')
         .end((err, res) => {
