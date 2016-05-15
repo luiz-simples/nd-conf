@@ -1,13 +1,14 @@
 version: '2'
 
 services:
-  development:
-    image: malera/ndconf
+  dev:
+    #build: ./docker
+    image: malera/nd-conf
     hostname: "dev"
     working_dir: /conf/src
     volumes:
       - $HOME/.ssh:/conf/.ssh:ro
-      - $HOME/.gitconfig:/conf/.gitconfig
+      - $HOME/.gitconfig:/conf/.gitconfig:ro
       - ./:/conf/src:rw
     environment:
       - NODE_ENV=development

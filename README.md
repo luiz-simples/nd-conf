@@ -1,15 +1,11 @@
 # nd-conf
 ===============================
 
-Node API: Actions via JSON
-
----------------------------------------------
+Node Configuration Server: Actions via JSON
 
 ## Dependencies for development
   * [GIT](https://git-scm.com/)
   * [Docker Compose](https://docs.docker.com/compose/)
-
----------------------------------------------
 
 ## First steps for development
 
@@ -21,7 +17,7 @@ $ cd nd-conf/
 
 ### you have docker-compose?
 ```sh
-$ docker-compose run --rm development
+$ docker-compose run --rm dev
 ```
 
 ### install and run tests

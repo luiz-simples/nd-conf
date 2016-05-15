@@ -44,8 +44,8 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 RUN npm update npm -g
 
 ### APPLY ENTRYPOINT
-COPY ./docker/bash.bashrc /etc/bash.bashrc
-COPY ./docker/docker-entrypoint.sh /var/lib/docker-entrypoint.sh
+COPY ./bash.bashrc /etc/bash.bashrc
+COPY ./docker-entrypoint.sh /var/lib/docker-entrypoint.sh
 RUN chmod +x /var/lib/docker-entrypoint.sh
 
 RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
