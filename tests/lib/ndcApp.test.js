@@ -10,7 +10,7 @@ describe('ndcApp', () => {
   beforeEach(() => {
     const mockRoutes  = {}
     const mockActions = {}
-    mockConfigs = { Express: jest.genMockFunction() }
+    mockConfigs = { Express: { run: jest.genMockFunction() } }
 
     mockLoaded  = {
       routes:  mockRoutes,
@@ -29,7 +29,7 @@ describe('ndcApp', () => {
     return ndcApp(server).then((ndcApp) => {
       expect(ndcLoad).toBeCalledWith(path)
       const expectedServerLoad =  Object.assign({}, server, mockLoaded)
-      expect(mockConfigs.Express).toBeCalledWith(expectedServerLoad)
+      expect(mockConfigs.Express.run).toBeCalledWith(expectedServerLoad)
     })
   })
 })

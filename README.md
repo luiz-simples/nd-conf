@@ -1,5 +1,4 @@
 # nd-conf
-===============================
 
 Node Configuration Server: Actions via JSON
 
@@ -24,4 +23,5 @@ $ docker-compose run --rm dev
 ```sh
 $ npm install
 $ npm test
+$ npm run build
 ```
