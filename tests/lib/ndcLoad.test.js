@@ -1,7 +1,5 @@
-jest.dontMock('path')
 jest.unmock('../../lib/ndcLoad')
 
-import path       from 'path'
 import ndcRoutes  from '../../lib/ndcRoutes'
 import ndcActions from '../../lib/ndcActions'
 import ndcConfigs from '../../lib/ndcConfigs'

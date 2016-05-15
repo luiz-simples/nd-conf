@@ -1,6 +1,4 @@
 jest.unmock('../../lib/ndcExecute')
-
-import path from 'path'
 import ndcExecute from '../../lib/ndcExecute'
 
 describe('ndcExecute', () => {
