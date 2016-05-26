@@ -18,7 +18,5 @@ coverage/
 node_modules/
 .gitignore
 .npmignore
-.babelrc
 .node-version
 Dockerfile
-lib

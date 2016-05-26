@@ -1,10 +1,10 @@
 jest.unmock('../../lib/ndcApp')
 
-import express from 'express'
-import request from 'supertest'
+const express = require('express')
+const request = require('supertest')
 
-import ndcApp  from '../../lib/ndcApp'
-import ndcLoad from '../../lib/ndcLoad'
+const ndcApp  = require('../../lib/ndcApp')
+const ndcLoad = require('../../lib/ndcLoad')
 
 describe('ndcApp with express', () => {
   let mockRoutes

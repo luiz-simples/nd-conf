@@ -1,5 +1,5 @@
 jest.unmock('../../lib/ndcExecute')
-import ndcExecute from '../../lib/ndcExecute'
+const ndcExecute = require('../../lib/ndcExecute')
 
 describe('ndcExecute', () => {
   const argScope  = 0

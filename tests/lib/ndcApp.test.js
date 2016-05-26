@@ -1,7 +1,7 @@
 jest.unmock('../../lib/ndcApp')
 
-import ndcApp  from '../../lib/ndcApp'
-import ndcLoad from '../../lib/ndcLoad'
+const ndcApp  = require('../../lib/ndcApp')
+const ndcLoad = require('../../lib/ndcLoad')
 
 describe('ndcApp', () => {
   let mockLoaded

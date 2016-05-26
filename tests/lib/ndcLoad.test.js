@@ -1,9 +1,9 @@
 jest.unmock('../../lib/ndcLoad')
 
-import ndcRoutes  from '../../lib/ndcRoutes'
-import ndcActions from '../../lib/ndcActions'
-import ndcConfigs from '../../lib/ndcConfigs'
-import ndcLoad    from '../../lib/ndcLoad'
+const ndcRoutes  = require('../../lib/ndcRoutes')
+const ndcActions = require('../../lib/ndcActions')
+const ndcConfigs = require('../../lib/ndcConfigs')
+const ndcLoad    = require('../../lib/ndcLoad')
 
 describe('ndcLoad', () => {
   let pathHappy

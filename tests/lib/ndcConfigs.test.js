@@ -1,8 +1,8 @@
 jest.dontMock('path')
 jest.unmock('../../lib/ndcConfigs')
 
-import path from 'path'
-import ndcConfigs from '../../lib/ndcConfigs'
+const path = require('path')
+const ndcConfigs = require('../../lib/ndcConfigs')
 
 const fixtures = path.resolve(__dirname.concat('/../support/fixtures/ndcConfigs'))
 

@@ -1,8 +1,7 @@
 jest.unmock('../../lib/ndcRoutes')
 
-import path from 'path'
-import ndcRoutes from '../../lib/ndcRoutes'
-
+const path = require('path')
+const ndcRoutes = require('../../lib/ndcRoutes')
 const fixtures = path.resolve(__dirname.concat('/../support/fixtures/ndcRoutes'))
 
 describe('ndcRoutes', () => {

@@ -1,15 +1,33 @@
 FROM debian:jessie
 
-MAINTAINER Luiz Amorim <luiz.simples@gmail.com> (https://nurimba.com.br)
-
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN echo "America/Sao_Paulo" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
-RUN apt-get update && apt-get upgrade --yes && apt-get dist-upgrade --yes && apt-get autoremove --yes
-RUN apt-get update && apt-get install --yes bash-completion libfontconfig1 bzip2 build-essential python-software-properties htop sudo vim git curl locales
+### UPDATE DEBIAN
+RUN apt-get update && apt-get upgrade -y && apt-get dist-upgrade -y && apt-get autoremove -y
 
+### INSTALL DEBIAN DEPENDENCIES
+RUN apt-get update &&  \
+    apt-get install -y \
+		curl               \
+    gzip               \
+		xz-utils           \
+    locales            \
+		netcat             \
+    build-essential    \
+    sudo               \
+		htop               \
+		git                \
+    vim                \
+    bash-completion    \
+    libfontconfig1     \
+    bzip2              \
+    python-software-properties \
+		--no-install-recommends
+
+### CONFIGURE LOCALES
 RUN echo "LANGUAGE=pt_BR.UTF-8" >> /etc/environment
 RUN echo "LANG=pt_BR.UTF-8"     >> /etc/environment
 RUN echo "LC_ALL=pt_BR.UTF-8"   >> /etc/environment
@@ -32,28 +50,32 @@ RUN set -ex \
   done
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 4.4.4
+ENV NODE_VERSION 6.2.0
 
-RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+RUN curl -kSLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
+  && curl -kSLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
   && grep " node-v$NODE_VERSION-linux-x64.tar.xz\$" SHASUMS256.txt | sha256sum -c - \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
 
-RUN npm update npm -g
+RUN npm cache clear
+RUN npm install bower -g
+RUN npm cache clear
+
+### APPLY BASH CONFIGURATION
+COPY ./bash.bashrc /etc/bash.bashrc
+
+### CREATE USER FOR PRODUCTION
+RUN useradd -u 1000 -G users -d /conf --shell /bin/bash -m conf && \
+    echo "secret\nsecret" | passwd conf
 
 ### APPLY ENTRYPOINT
-COPY ./bash.bashrc /etc/bash.bashrc
-COPY ./docker-entrypoint.sh /var/lib/docker-entrypoint.sh
-RUN chmod +x /var/lib/docker-entrypoint.sh
-
-RUN echo "%sudo ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    useradd -u 1000 -G users,sudo -d /conf --shell /bin/bash -m conf && \
-    echo "secret\nsecret" | passwd conf
+COPY ./docker-entrypoint.sh /usr/local/docker-entrypoint.sh
+RUN chmod +x /usr/local/docker-entrypoint.sh
 
 USER conf
 WORKDIR /conf
 
 CMD [ "bash" ]
-ENTRYPOINT [ "/var/lib/docker-entrypoint.sh" ]
+ENTRYPOINT ["/usr/local/docker-entrypoint.sh"]
