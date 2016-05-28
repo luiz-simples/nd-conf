@@ -1,10 +1,10 @@
 {
   "name": "nd-conf",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Node Configuration Server: Actions via JSON",
   "main": "./lib/ndcApp.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --c overage"
   },
   "repository": {
     "type": "git",
