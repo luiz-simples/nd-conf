@@ -23,5 +23,4 @@ $ docker-compose run --rm dev
 ```sh
 $ npm install
 $ npm test
-$ npm run build
 ```

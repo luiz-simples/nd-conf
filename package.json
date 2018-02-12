@@ -2,49 +2,52 @@
   "name": "nd-conf",
   "version": "1.0.6",
   "description": "Node Configuration Server: Actions via JSON",
-  "main": "./lib/ndcApp.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "jest --c overage"
+    "test": "jest --forceExit"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/luiz-simples/nd-conf.git"
   },
-  "keywords": [
-    "NodeJS",
-    "API",
-    "Rest",
-    "JSON"
-  ],
-  "author": "Luiz Amorim <luiz.simples@gmail.com> (https://nurimba.com.br)",
+  "author": "Luiz Amorim <luiz.simples@gmail.com>",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/luiz-simples/nd-conf/issues"
   },
   "homepage": "https://github.com/luiz-simples/nd-conf#readme",
+  "devDependencies": {
+    "eslint": "^4.17.0",
+    "eslint-config-rackt": "^1.1.1",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^22.2.2"
+  },
   "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "es6"
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/tests/**/*Test.js?(x)"
     ],
-    "testDirectoryName": "tests",
-    "testFileExtensions": [
-      "test.js"
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/src/$1",
+      "^tests/(.*)$": "<rootDir>/tests/$1"
+    },
+    "collectCoverage": false,
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov"
     ],
     "unmockedModulePathPatterns": [
-      "tests/support",
-      "node_modules/glob",
-      "node_modules/express",
-      "node_modules/supertest"
+      "node_modules/"
     ]
-  },
-  "devDependencies": {
-    "express": "^4.13.4",
-    "jest-cli": "^0.9.2",
-    "supertest": "^1.2.0"
-  },
-  "dependencies": {
-    "glob": "^7.0.3"
   }
 }
